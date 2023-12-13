@@ -1,0 +1,26 @@
+Algorithm TokenizeAndPrint
+Input: None
+Output: None
+
+1. Open the input file ("input.txt") in read mode.
+2. Open the output file ("output.txt") in write mode.
+3. Initialize line number (l) to 1, token number (t) to 0, and character array (str) for lexemes.
+4. Declare a character variable (ch) to read characters from the input file.
+5. Declare a flag variable and index variables (i, j).
+6. Define an array of keywords.
+7. Print the header for the output file.
+8. Loop until the end of the input file is reached:
+    a. Initialize i and flag to 0.
+    b. Read a character from the input file.
+    c. Check for operators (+, -, *, /) and special symbols (;, {, }, (, ), ?, @, !, %), and print accordingly.
+    d. If the character is a digit, print it as a digit.
+    e. If the character is an alphabet, read the whole word until a space or an alphanumeric character is encountered.
+    f. Check if the word is a keyword or an identifier, and print accordingly.
+    g. If the character is a newline character, increment the line number (l).
+9. Close the input file.
+10. Open the output file again in read mode.
+11. If the output file opening is unsuccessful, print an error message and return 1.
+12. Print the contents of the output file to the console until the end of the file.
+13. Close the output file.
+14. End.
+

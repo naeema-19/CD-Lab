@@ -1,0 +1,40 @@
+Algorithm GenerateAssemblyCode
+Input: None
+Output: None
+
+1. Declare variables: code[10][30], str[20], opr[10], i = 0, k = 0.
+2. Open the file "input.txt" in read mode (fp1).
+3. Open a new file "result.txt" in write mode (fp2) for storing the assembly code.
+4. While not end of file (feof(fp1)):
+    a. Read a line from fp1 containing operation (op), operands (fir, sec, res).
+    b. Print the read line to the console for verification.
+    c. Switch on the operation (op):
+        - Case '+': Set opr to "ADD " and reset i to 0.
+        - Case '-': Set opr to "SUB" and reset i to 0.
+        - Case '*': Set opr to "MUL " and set i to 1.
+        - Case '/': Set opr to "DIV" and set i to 1.
+    d. If the length of fir is 2 (e.g., 'R1', 'R2'):
+        - Generate the corresponding MOV instruction to load value from registers CH, CL, DH, or DL to AX.
+        - Print the generated MOV instruction to fp2.
+    e. If the length of fir is greater than 2:
+        - Generate the MOV instruction to load value from memory location [fir] to AX.
+        - Print the generated MOV instruction to fp2.
+    f. If the length of sec is 2:
+        - Generate the corresponding MOV instruction to load value from registers CH, CL, DH, or DL to BX.
+        - Print the generated MOV instruction to fp2.
+    g. If the length of sec is greater than 2:
+        - Generate the MOV instruction to load value from memory location [sec] to BX.
+        - Print the generated MOV instruction to fp2.
+    h. If i is 0:
+        - Generate the assembly code for operation opr with operands AX and BX.
+        - Print the generated assembly code to fp2.
+    i. If i is 1:
+        - Generate the assembly code for operation opr with operand BX.
+        - Print the generated assembly code to fp2.
+    j. If the length of res is 2:
+        - Generate the corresponding MOV instruction to store the result in registers CH, CL, DH, or DL.
+        - Print the generated MOV instruction to fp2.
+    k. Increment k.
+5. Close both files (fp1 and fp2).
+
+Note: The generated assembly code is written to "result.txt".

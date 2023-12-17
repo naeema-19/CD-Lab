@@ -1,0 +1,46 @@
+Algorithm: Recursive Descent Parser for Arithmetic Expression
+
+1. Declare global variables:
+   - input: array to store the input arithmetic expression
+   - i: index to traverse the input expression
+   - error: flag to indicate a parsing error
+
+2. Define parsing functions:
+   a. E():
+      - Call T().
+      - Call Eprime().
+
+   b. Eprime():
+      - If the current character is '+':
+         - Increment i.
+         - Call T().
+         - Call Eprime().
+
+   c. T():
+      - Call F().
+      - Call Tprime().
+
+   d. Tprime():
+      - If the current character is '*':
+         - Increment i.
+         - Call F().
+         - Call Tprime().
+
+   e. F():
+      - If the current character is alphanumeric:
+         - Increment i.
+      - Else if the current character is '(': 
+         - Increment i.
+         - Call E().
+         - If the current character is ')', increment i.
+         - Else, set error flag.
+
+3. In the main function:
+   a. Initialize i to 0 and error to 0.
+   b. Read the arithmetic expression into the input array.
+   c. Call E().
+   d. Check if the entire expression is parsed (i equals the length of the input) and no parsing errors (error is 0):
+      - If true, print "Accepted..!!!".
+      - Else, print "Rejected..!!!".
+
+End Algorithm

@@ -1,0 +1,65 @@
+1. Open the input file for reading (inp.txt).
+2. Open the symbol table file for writing (result.txt).
+3. Open the temporary file for writing constants (con.txt).
+4. Initialize variables and data structures:
+   - symbols: a 2D array to store identifiers and their values.
+   - idstack: a stack to store identifiers during expression evaluation.
+   - opstack: a stack to store operators during expression evaluation.
+   - idtop: top of the idstack.
+   - optop: top of the opstack.
+   - bp: buffer pointer for lexeme construction.
+   - isd: flag to indicate if the current lexeme is a constant.
+   - expecting: flag to indicate if an assignment (=) is expected.
+   - isStringLiteral: flag to indicate if the current character is part of a string literal.
+   - defining: flag to indicate if currently defining a variable.
+
+5. Read characters from the input file until the end of file:
+   a. If the character is part of a string literal:
+      - Append it to the symbol table.
+   b. If the character is an operator (+, -, *, /):
+      - Check for and perform constant propagation if necessary.
+   c. If the character is alphanumeric or an underscore:
+      - Build the lexeme.
+   d. If the character is a special character (; or ,):
+      - Check for and perform constant propagation if necessary.
+      - Update the symbol table with constant values.
+   e. If the character is a comparison or assignment operator:
+      - Handle accordingly (set flags, update idstack).
+   f. If the character is a parenthesis or bracket:
+      - Append it to the symbol table.
+
+6. Close the input file, symbol table file, and temporary file.
+
+7. Display the result, if needed.
+
+Algorithm for Constant Propagation:
+1. When encountering an operator, check if there are constants on the stack.
+2. If yes, evaluate the operation and replace the operands with the result.
+3. Update the symbol table with the new constant value.
+
+Algorithm for Handling Identifiers:
+1. When an identifier is encountered:
+   a. Check if it's already in the symbol table.
+   b. If yes, push its value onto the idstack.
+   c. If not, push the identifier onto the idstack.
+
+Algorithm for Handling Special Characters:
+1. When a special character (; or ,) is encountered:
+   a. Perform constant propagation for the current expression.
+   b. If defining a variable, add it to the symbol table.
+   c. Reset flags and data structures.
+
+Algorithm for Handling Comparison and Assignment Operators:
+1. When a comparison or assignment operator is encountered:
+   a. Set flags and update idstack accordingly.
+
+Algorithm for String Literal Handling:
+1. When a double quote is encountered:
+   a. Toggle the isStringLiteral flag.
+   b. Output the double quote to the symbol table.
+
+Algorithm for Error Handling:
+1. When an error is detected:
+   a. Display an error message with relevant information.
+   b. Terminate the program.
+

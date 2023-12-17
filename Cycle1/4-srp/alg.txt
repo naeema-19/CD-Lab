@@ -1,0 +1,37 @@
+Algorithm: Shift-Reduce Parser
+
+1. Initialize:
+   - Declare a stack to store symbols during parsing.
+   - Declare variables to store input, productions, and other necessary information.
+   - Read productions from a grammar file or input and store them.
+
+2. Input:
+   - Prompt the user to enter an input string.
+   - Initialize the input pointer (i) to the first character of the input.
+
+3. Parsing Loop:
+   - Repeat until the input is accepted or rejected:
+     a. If there are still characters in the input:
+        i. Read the current input symbol (currentSymbol) at position i.
+        ii. Perform SHIFT: Push the currentSymbol onto the stack.
+        iii. Increment the input pointer (i).
+        iv. Display the current stack, input, and action.
+
+     b. Check for reductions:
+        i. For each production (lhs -> rhs) in the grammar:
+           - Check if the top of the stack matches rhs.
+           - If a match is found:
+              a. Perform REDUCE: Pop rhs from the stack and push lhs.
+              b. Display the current stack, input, and the reduction action.
+              c. Reset the production index to recheck for other reductions.
+
+     c. Check for acceptance or rejection:
+        i. If the stack contains the start symbol and the input is fully consumed:
+           - Print that the input is accepted.
+           - Exit the parsing loop.
+        ii. If the input is fully consumed but the stack doesn't contain the start symbol:
+           - Print that the input is not accepted.
+           - Exit the parsing loop.
+
+4. End the algorithm.
+

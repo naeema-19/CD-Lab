@@ -1,0 +1,96 @@
+1. Initialize variables: top = -1, j = 0, front = -1, ind = '1'.
+2. Open files for writing three-address code, quadruple, and triple.
+3. Print headers to the respective files.
+
+4. Input the infix expression and convert it to postfix.
+   a. Initialize i = 0.
+   b. While the current character in the postfix expression is not '\0', do steps c-f.
+      c. If the current character is '(', push it onto the stack.
+      d. If the current character is an operand (alphabet), append it to the postfix expression.
+      e. If the current character is an operator (+, -, *, /, ^), do the following:
+         i. Pop and append operators from the stack to the postfix expression until the top operator has lower precedence or the stack is empty.
+         ii. Push the current operator onto the stack.
+      f. If the current character is ')', pop and append operators from the stack to the postfix expression until '(' is encountered.
+      g. Increment i to move to the next character.
+
+5. Loop through each character (c) in the postfix expression:
+    a. If c is an operand:
+        i. Enqueue it to the queue.
+    b. If c is an operator:
+        i. Pop two operands (O2 and O1) from the queue.
+        ii. Generate three-address code based on the type of operands:
+            - If both O1 and O2 are constants: RES = O1 OP O2
+            - If O1 is a temporary variable and O2 is a constant: RES = O1 OP O2
+            - If O1 is a constant and O2 is a temporary variable: RES = O1 OP O2
+            - If both O1 and O2 are temporary variables: RES = O1 OP O2
+        iii. Write the quadruple (c, O2, O1, RES) to quadraple.txt.
+        iv. Write the triple (ind, c, O1, O2) to triple.txt, where ind is a new temporary variable.
+        v. Enqueue the result (temporary variable) to the queue.
+        vi. Increment ind for the next temporary variable.
+         h. Update the queue with the result.
+         i. Increment ind.
+      j. If the current character is an operand, push it onto the queue.
+      k. Increment i to move to the next character.
+
+6. Close the files.
+
+End Algorithm.
+
+
+
+
+Certainly! Let's illustrate the working of the algorithm using a simple postfix expression "ab+c*":
+
+1. **Initialization:**
+   - Variables: top = -1, j = 0, front = -1, ind = '1'.
+   - Postfix expression: "ab+c*"
+
+2. **Processing:**
+   - Loop through each character (c) in the postfix expression:
+     - **Iteration 1:**
+       - c = 'a' (operand): Enqueue 'a' to the queue.
+         - Queue: ['a']
+     - **Iteration 2:**
+       - c = 'b' (operand): Enqueue 'b' to the queue.
+         - Queue: ['a', 'b']
+     - **Iteration 3:**
+       - c = '+' (operator):
+         - Dequeue 'b' (O1) and 'a' (O2) from the queue.
+         - Generate three-address code: "t1 = a + b"
+         - Write quadruple: '+' a b t1
+         - Write triple: '1 + t1 a b'
+         - Enqueue 't1' (result) to the queue.
+         - Queue: ['t1']
+     - **Iteration 4:**
+       - c = 'c' (operand): Enqueue 'c' to the queue.
+         - Queue: ['t1', 'c']
+     - **Iteration 5:**
+       - c = '*' (operator):
+         - Dequeue 'c' (O1) and 't1' (O2) from the queue.
+         - Generate three-address code: "t2 = t1 * c"
+         - Write quadruple: '*' t1 c t2
+         - Write triple: '2 * t2 t1 c'
+         - Enqueue 't2' (result) to the queue.
+         - Queue: ['t2']
+
+3. **Final Result:**
+   - Postfix expression processed, and corresponding three-address code, quadruples, and triples generated.
+
+4. **Output:**
+   - 3addr.txt:
+     ```
+     t1 = a + b
+     t2 = t1 * c
+     ```
+   - quadraple.txt:
+     ```
+     + a b t1
+     * t1 c t2
+     ```
+   - triple.txt:
+     ```
+     1 + t1 a b
+     2 * t2 t1 c
+     ```
+
+This illustrates the working of the algorithm using a queue to handle operands and temporary variables in the postfix expression.

@@ -1,0 +1,27 @@
+Algorithm EpsilonClosureNFA:
+
+1. Open the input file for reading (e.g., "input.txt").
+
+2. Read the number of states (n) from the user.
+
+3. Read the states from the user and store them in the array states.
+
+4. Initialize variables: i = 0, k = 0.
+
+5. Repeat for each state in the array states:
+     a. Set i = 0.
+     b. Copy the current state to the variable state.
+     c. Copy the current state to the variable copy.
+     d. Add the current state to the result array.
+     e. Repeat while there are transitions in the input:
+          i. Read the triple (state1, input_char, state2) from the file.
+          ii. If state is equal to state1 and input_char is 'e' (epsilon):
+                - Add state2 to the result array.
+                - Copy state2 to the variable state.
+          iii. Repeat until there are no more transitions.
+
+6. Display the epsilon closure for each state in the result array.
+
+7. Close the input file.
+
+End Algorithm
